@@ -1,8 +1,7 @@
 class  Config:
     DEBUG = True
-    template_folder = 'D:\\python_project\\flask_blog'
-    static_folder = 'D:\\python_project\\static'
-
+    static_folder = 'D:\\python_project\\flask_blog\\static'
+    template_folder = 'D:\\python_project\\flask_blog\\templates'
     #mysql数据源s
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:vvZh0DYi@47.110.161.170:3306/flask_blog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -6,10 +6,7 @@ from application.user.view import user_blueprint
 
 
 def create_app():
-    app = Flask(__name__,
-                static_folder='',
-                template_folder=''
-                )
+    app = Flask(__name__,template_folder = config.Config.template_folder)
 
     # 初始化配置文件
     app.config.from_object(config.DevelopmentConfig)
