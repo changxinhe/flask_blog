@@ -2,6 +2,10 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
 from application import create_app, db
+#加载数据库表
+from application.article.model import Article
+from application.user.model import User
+
 
 app = create_app()
 

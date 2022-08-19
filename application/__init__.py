@@ -1,12 +1,14 @@
 from flask import Flask
-from application import config
+from application import config, user, article
 from application.article.view import article_blueprint
 from application.datasource import db, bootstrap
 from application.user.view import user_blueprint
 
 
 def create_app():
-    app = Flask(__name__,template_folder = '../templates')
+    app = Flask(__name__,
+                template_folder =config.DevelopmentConfig.template_folder,
+                static_folder=config.DevelopmentConfig.static_folder)
 
     # 初始化配置文件
     app.config.from_object(config.DevelopmentConfig)
