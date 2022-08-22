@@ -1,48 +1,31 @@
 {% extends 'user/base.html' %}
-{% block tile %}
-    用户展示中心
-{% endblock %}
+
+        {% block mystyles %}
+
+    <style>
+        #container{
+            border: 5px solid brown;
+            margin-bottom: 10px;
+        }
+    </style>
+
+
+        {% endblock %}
+
 
 {% block content %}
-    <h1>文章</h1>
+    <h1>文章展示</h1>
+{%  for  article in articles %}
+    <div id="container"  >
+<p class="text-center"> {{article.title}} </p>
+<!--根据文章找作者-->
 
-<span> 当前的用户人数是： {{ users |length }}人  </span>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">序号</th>
-      <th scope="col">用户名</th>
-        <th scope="col">昵称</th>
-      <th scope="col">手机号</th>
-      <th scope="col">注册时间</th>
-	  <th scope="col">操作</th>
-    </tr>
-  </thead>
+<p class="fw-light">    作者： {{ article.user.username }}    </p>
+<p class="text-sm-start">    {{ article.content }}    </p>
 
-  <tbody>
-  {% for user in users %}
-    <tr>
-      <th scope="row">{{ loop.index }}</th>
-      <td>{{ user.username }}</td>
-        <td>{{ user.show_name }}</td>
-      <td>{{ user.phone }}</td>
-      <td>{{ user.rdtime }}</td>
-      <td>
-          {#创建链接，发送一个get请求#}
-<!--          <a href="{{ url_for('user.user_update')}}?id={{ user.id }}">修改</a>-->
-<!--          <a href="{{ url_for('user.user_del')}}?id={{ user.id }}">删除</a>-->
-<div class="btn-group">
-  <a href="{{ url_for('user.user_update')}}?id={{ user.id }}" class="btn btn-outline-primary">修改</a>
-  <a href="{{ url_for('user.user_del')}}?id={{ user.id }}" class="btn btn-outline-primary">删除</a>
-</div>
-      </td>
+    </div>
 
-    </tr>
-  {% endfor %}
-  </tbody>
+{% endfor %}
 
-</table>
-
-
-    </table>
 {% endblock %}
+

@@ -20,3 +20,8 @@ def push():
     else:
         users = User.query.filter_by(isdelete=0).all()
         return render_template('article/add_article.html',users=users)
+
+@article_blueprint.route('/article_show',methods=['GET','POST'])
+def article_show():
+    articles = Article.query.all()
+    return render_template('/article/show.html',articles=articles)

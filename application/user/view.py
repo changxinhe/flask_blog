@@ -8,10 +8,18 @@ from application.user.tool import encrypt
 user_blueprint = Blueprint('user',__name__,url_prefix='/user/')
 #添加用户蓝图，用户路由根目录为/user
 
+#用户登录
 @user_blueprint.route('/login', methods =['GET','POST'])
-def root():
+def login():
     if request.method == 'GET':
-        return render_template('user/login.html')
+        username = request.form.get('username')
+        password = encrypt(request.form.get('password'))
+        login_user = User.query.filter(User.isdelete==0).filter(User.username==username).all()
+        for u in login_user():
+            if u.password == password:
+                return '登录成功'
+        else:
+            return render_template('user/login.html',msg='账号或密码错误')
 
 #用户注册
 @user_blueprint.route('/register', methods =['GET','POST'])
@@ -70,10 +78,12 @@ def user_del():
 
 
 
-
-
-
-
+#ceshi
+@user_blueprint.route("/test")
+def test():
+    U_pwd = User.query.filter(User.username=='hcx').all()
+    U_pwd = U_pwd.password
+    return render_template('user/test.html',U_pwd=U_pwd)
 
 
 

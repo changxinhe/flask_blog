@@ -10,6 +10,8 @@
             {{ bootstrap.load_css() }}
         {% endblock %}
 
+    {% block mystyles %} {% endblock %}
+
         <title>Your page title</title>
         {% endblock %}
 
@@ -30,6 +32,9 @@
         <!-- Optional JavaScript -->
         {{ bootstrap.load_js() }}
         {% endblock %}
+
+    {% block myscripts %} {% endblock %}
+
 
         {% block navbar %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
