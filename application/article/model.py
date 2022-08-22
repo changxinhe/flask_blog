@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from application import db
+from application.datasource import db
+
 
 
 class Article(db.Model):
@@ -12,5 +13,5 @@ class Article(db.Model):
     click_num = db.Column(db.Integer,default=0)
     save_num = db.Column(db.Integer,default=0)
     like_num = db.Column(db.Integer,default=0)
-    use_id =db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
+    user_id =db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
 

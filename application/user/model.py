@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from application import db
+from application.datasource import db
 
 
 class User(db.Model):
@@ -16,3 +16,4 @@ class User(db.Model):
     isdelete =db.Column(db.Boolean,default=0,comment='用户状态,1：删除,0：存在')
     #一对多，增加一个字段
     articles = db.relationship('Article',backref='user')
+

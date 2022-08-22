@@ -1,8 +1,12 @@
 from flask import Flask
-from application import config, user, article
+from application import config
+
 from application.article.view import article_blueprint
 from application.datasource import db, bootstrap
 from application.user.view import user_blueprint
+#导入模型
+from application.article.model import Article
+from application.user.model import User
 
 
 def create_app():
