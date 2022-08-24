@@ -38,19 +38,17 @@
 
 <div class = loginForm>
 <form action="login" method="post" >
-  <div class="mb-3">
-    <label for="username" class="form-label">用户名</label>
-    <input type="text" class="form-control" id="username" , name="username" >
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInput"  placeholder="用户名" name="username" >
+    <label for="floatingInput" class="form-label">用户名</label>
   </div>
 
-  <div class="mb-3">
-    <label for="Password" class="form-label">密码</label>
-    <input type="password" class="form-control" id="Password",name="password">
-  </div>
-<!--  <div class="mb-3 form-check">-->
-<!--    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-<!--    <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-<!--  </div>-->
+
+<div class="form-floating">
+  <input type="password" class="form-control" id="floatingPassword" placeholder="密码" name="password">
+  <label for="floatingPassword">密码</label>
+</div>
+
   <button type="submit" class="btn btn-primary">登录</button>
 </form>
 </div>

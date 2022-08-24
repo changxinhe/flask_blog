@@ -15,12 +15,13 @@
 
 {% block content %}
     <h1>文章展示</h1>
-{%  for  article in articles %}
+
+{%  for  article in users.articles %}
     <div id="container"  >
 <p class="text-center"> {{article.title}} </p>
 <!--根据文章找作者-->
 
-<p class="fw-light">    作者： {{ article.user.username }}    </p>
+<p class="fw-light">    作者： {{ users.username }}    </p>
 <p class="text-sm-start">    {{ article.content }}    </p>
     </div>
 

@@ -7,7 +7,7 @@
     <h1>用户信息</h1>
 
 <span> 当前的用户人数是： {{ users |length }}人  </span>
-    <form action="show" method="post">
+    <form action="user_search" method="post">
         <input type="text" name="search" placeholder="请输入用户名或者手机号码">
         <input type="submit" value="搜索" >
    </form>
@@ -38,6 +38,7 @@
 <div class="btn-group">
   <a href="{{ url_for('user.user_update')}}?id={{ user.id }}" class="btn btn-outline-primary">修改</a>
   <a href="{{ url_for('user.user_del')}}?id={{ user.id }}" class="btn btn-outline-primary">删除</a>
+  <a href="{{ url_for('article.article_show2')}}?id={{ user.id }}" class="btn btn-outline-primary">信息</a>
 </div>
       </td>
 

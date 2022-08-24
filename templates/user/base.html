@@ -53,23 +53,37 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            IT
+            文章分类
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">网络基础</a></li>
+            <li><a class="dropdown-item" href="#">文章分类</a></li>
             <li><a class="dropdown-item" href="#">linux</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">docker</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link disabled">其他</a>
         </li>
-      </ul>
+
+      <li class="nav-item">
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      </li>
+      </ul>
+
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{ url_for('user.login') }}">登录</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('user.register') }}">注册</a>
+      </li>
+    </ul>
+
     </div>
   </div>
 </nav>

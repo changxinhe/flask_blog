@@ -1,23 +1,17 @@
 import hashlib
 
-msg = '11'
-pwd1 = hashlib.sha256(msg.encode('utf8')).hexdigest()
-pwd2 = hashlib.sha256(pwd1.encode('utf-8')).hexdigest()
-print("pwd2 = ",pwd2)
+from werkzeug.security import check_password_hash, generate_password_hash
 
+x = 'asdaijfkjfsn'
+pwd_x = hashlib.sha256(x.encode('utf-8')).hexdigest()
+flag = check_password_hash(pwd_x,x)
 
-def encrypt(passwords):
-    for i in range(2):
-        passwords = hashlib.sha256(passwords.encode('utf-8')).hexdigest()
-    return passwords
+pwd1 = '1234'
+pwd2 = '1234'
+pwd1_1 = generate_password_hash(pwd1)
+pwd2_2 = generate_password_hash(pwd2)
+print(pwd1_1,'\n',pwd2_2,sep='')
 
-print(encrypt('11'))
+p1 = check_password_hash(pwd1_1,pwd2)
 
-
-def num(n):
-    if  n == 1:
-        return 1
-    else:
-        return n + num(n-1)
-
-print(num(998))
+print(p1)

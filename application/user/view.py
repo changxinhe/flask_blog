@@ -1,6 +1,8 @@
 import hashlib
 
 from flask import Blueprint, render_template, request, redirect, url_for
+from sqlalchemy import or_
+
 from application import db, user
 from application.user.model import User
 from application.user.tool import encrypt
@@ -11,15 +13,22 @@ user_blueprint = Blueprint('user',__name__,url_prefix='/user/')
 #用户登录
 @user_blueprint.route('/login', methods =['GET','POST'])
 def login():
-    if request.method == 'GET':
-        username = request.form.get('username')
-        password = encrypt(request.form.get('password'))
-        login_user = User.query.filter(User.isdelete==0).filter(User.username==username).all()
-        for u in login_user():
-            if u.password == password:
-                return '登录成功'
+    if request.method == 'POST':
+        login_username = request.form.get('username')
+        login_password = encrypt(request.form.get('password'))
+        user = User.query.filter(User.isdelete==0).filter(User.username==login_username).all()
+        if not user:
+            return  render_template('user/login.html',msg='用户不存在')
         else:
-            return render_template('user/login.html',msg='账号或密码错误')
+            for u in user:
+                if u.password == login_password:
+                    users = User.query.filter(User.isdelete==0).filter(User.username==login_username).all()
+                    return render_template('user/show.html',users=users)
+                else:
+                    return render_template('user/login.html',msg='账号或密码错误')
+    else:
+        return render_template('user/login.html')
+
 
 #用户注册
 @user_blueprint.route('/register', methods =['GET','POST'])
@@ -46,6 +55,7 @@ def show():
     users = User.query.filter(User.isdelete==0).all()
     return render_template('user/show.html',users=users)
 
+
 #用户修改
 @user_blueprint.route('/user_update',methods=['POST','GET'])
 def user_update():
@@ -65,6 +75,7 @@ def user_update():
         user = User.query.get(id)
         return render_template('user/update.html',user=user)
 
+
 #用户删除
 @user_blueprint.route('/user_del',methods=['POST','GET'])
 def user_del():
@@ -76,18 +87,15 @@ def user_del():
         db.session.commit()
         return redirect(url_for('user.show'))
 
-
-
-#ceshi
-@user_blueprint.route("/test")
-def test():
-    U_pwd = User.query.filter(User.username=='hcx').all()
-    U_pwd = U_pwd.password
-    return render_template('user/test.html',U_pwd=U_pwd)
-
-
-
-
+#搜索
+@user_blueprint.route('/user_search',methods=['POST'])
+def user_search():
+    # if request.method == 'POST':
+    user_input = request.form.get('search')
+    users = User.query.filter(User.isdelete==0).filter(or_(
+        User.username.contains(user_input),
+        User.phone.contains(user_input))).all()
+    return render_template('user/show.html',users=users)
 
 
 
@@ -99,12 +107,8 @@ def test():
 
 
 
-# @user_blueprint.route('/register', methods =['GET','POST'])
-# def register():
-#     if request.method == 'POST':
-#         if request.form.get('password') ==request.form.get('repassword'):
-#             db.create_all()
-#             # newuser = User
-#             pass
-#
-#         pass
+
+
+
+
+
